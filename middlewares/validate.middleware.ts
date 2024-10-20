@@ -23,9 +23,9 @@ const validateCredentialsAtLogin = (req: Request, res: Response, next: NextFunct
 };
 
 const validateCredentialsAtSubmit = (req: Request, res: Response, next: NextFunction): void => {
-  const { image_url, title, description, user } = req.body;
+  const { image_url, title, description } = req.body;
 
-  if (!image_url || !title || !description || !user?.id) {
+  if (!image_url || !title || !description) {
     res.status(400).json({ message: "All fields are required" });
     return;
   }
