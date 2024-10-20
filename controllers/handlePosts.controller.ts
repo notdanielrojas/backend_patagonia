@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { postUser, getPostsByUserId, editPostUser, deletePostUser, getAllPosts } from "../models/posts.model.js";
+import { postUser, getPostsByUserId, editPostUser, deletePostUser, getAllPosts, getPostById } from "../models/posts.model.js";
 import { handleErrors, handleSuccess } from "../utils/codes.utils.js";
 
 interface UserRequest extends Request {
@@ -85,17 +85,22 @@ const handleEditPostUser = async (req: UserRequest, res: Response): Promise<void
   console.log("Request body:", { image_url, title, description });
 
   if (!image_url || !title || !description || !userId) {
-    console.log("Missing fields:", {
-      image_url,
-      title,
-      description,
-      userId,
-    });
+    console.log("Missing fields:", { image_url, title, description, userId });
     res.status(400).json({ message: "Missing required fields" });
     return;
   }
 
   try {
+      const post = await getPostById(Number(id));
+    if (!post) {
+      res.status(404).json({ message: "Post not found" });
+      return 
+    }
+
+    if (post.user_id !== Number(userId)) {
+      res.status(403).json({ message: "You are not authorized to edit this post" });
+      return 
+    }
     await editPostUser({ image_url, title, description, user_id: Number(userId) }, Number(id));
     const successResponse = handleSuccess(200);
     res.status(successResponse.status).json(successResponse.message);
@@ -105,6 +110,7 @@ const handleEditPostUser = async (req: UserRequest, res: Response): Promise<void
     res.status(errorResponse.status).json({ message: errorResponse.message, error: (error as Error).message });
   }
 };
+
 
 const handleDeletePostUser = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;

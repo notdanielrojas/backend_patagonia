@@ -21,6 +21,13 @@ const getPostsByUserId = async (user_id: number): Promise<UserPost[]> => {
   return result.rows as UserPost[];
 };
 
+const getPostById = async (postId: number): Promise<UserPost | null> => {
+  const query = `SELECT * FROM posts WHERE id = $1`;
+  const values = [postId];
+  const result = await pool.query(query, values);
+  return result.rows[0] || null;
+};
+
 const getAllPosts = async (): Promise<UserPost[]> => {
   const query = `SELECT * FROM posts`;
   const result = await pool.query(query);
@@ -54,4 +61,4 @@ const deletePostUser = async (id: number): Promise<void> => {
   }
 };
 
-export { postUser, getPostsByUserId, editPostUser, deletePostUser, getAllPosts };
+export { postUser, getPostById, getPostsByUserId, editPostUser, deletePostUser, getAllPosts };
