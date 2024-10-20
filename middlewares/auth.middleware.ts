@@ -17,7 +17,6 @@ const authMiddleware = (req: CustomRequest, res: Response, next: NextFunction): 
   }
 
   try {
-   
     const { id, email } = verifyDecodeToken(authorizationHeader);
     req.user = { id, email };
     next();
