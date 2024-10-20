@@ -8,6 +8,13 @@ interface UserRequest extends Request {
   };
 }
 
+interface UserPost {
+  image_url: string;
+  title: string;
+  description: string;
+  user_id: number;
+}
+
 const handlePostUser = async (req: UserRequest, res: Response): Promise<void> => {
   const { image_url, title, description, user } = req.body;
 
@@ -73,13 +80,23 @@ const handleEditPostUser = async (req: UserRequest, res: Response): Promise<void
   const { image_url, title, description } = req.body;
   const userId = req.user?.id;
 
+  console.log("Post ID:", id);
+  console.log("User ID:", userId);
+  console.log("Request body:", { image_url, title, description });
+
   if (!image_url || !title || !description || !userId) {
+    console.log("Missing fields:", {
+      image_url,
+      title,
+      description,
+      userId,
+    });
     res.status(400).json({ message: "Missing required fields" });
     return;
   }
 
   try {
-    await editPostUser(Number(id), { image_url, title, description, user_id: Number(userId) });
+    await editPostUser({ image_url, title, description, user_id: Number(userId) }, Number(id));
     const successResponse = handleSuccess(200);
     res.status(successResponse.status).json(successResponse.message);
   } catch (error) {

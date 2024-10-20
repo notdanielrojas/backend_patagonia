@@ -27,8 +27,7 @@ const getAllPosts = async (): Promise<UserPost[]> => {
   return result.rows as UserPost[];
 };
 
-
-const editPostUser = async (id: number, user: UserPost): Promise<void> => {
+const editPostUser = async (user: UserPost, id: number): Promise<void> => {
   const { image_url, title, description } = user;
   const values = [image_url, title, description, id];
   const query = "UPDATE posts SET image_url = $1, title = $2, description = $3 WHERE id = $4";
