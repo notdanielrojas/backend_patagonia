@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { logger } from "./middlewares/logger.middleware";
-import handleCredentialsRouter from "./routes/login.routes";
-import handleRegisterUserRouter from "./routes/user.routes";
-import handlePostUserRouter from "./routes/posts.routes";
-import handleOrderRouter from "./routes/orders.routes";
-import HandleOrdersByUserIdRouter from "./routes/orders.routes";
+import { logger } from "../middlewares/logger.middleware.js";
+import handleCredentialsRouter from "../routes/login.routes.js";
+import handleRegisterUserRouter from "../routes/user.routes.js";
+import handlePostUserRouter from "../routes/posts.routes.js";
+import handleOrderRouter from "../routes/orders.routes.js";
+import HandleOrdersByUserIdRouter from "../routes/orders.routes.js";
 
 dotenv.config();
 

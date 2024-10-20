@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
-import { handleCredentialsAtLogin } from "../controllers/handleLogin.controller";
-import { validateCredentialsAtLogin } from "../middlewares/validate.middleware";
-import { handleErrors } from "../utils/codes.utils";
+import { handleCredentialsAtLogin } from "../controllers/handleLogin.controller.js";
+import { validateCredentialsAtLogin } from "../middlewares/validate.middleware.js";
+import { handleErrors } from "../utils/codes.utils.js";
 
 const router = Router();
 

@@ -1,4 +1,4 @@
-import pool from "./database.model";
+import pool from "./database.model.js";
 
 interface OrderDetails {
   order_id: number;

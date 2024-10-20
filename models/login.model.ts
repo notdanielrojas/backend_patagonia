@@ -1,4 +1,4 @@
-import pool from "./database.model";
+import pool from "./database.model.js";
 import bcrypt from "bcryptjs";
 
 interface User {

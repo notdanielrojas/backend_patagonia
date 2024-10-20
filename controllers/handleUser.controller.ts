@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { registerUser, getUserByEmail, editUser, deleteUser, getAllUsers } from "../models/user.model";
-import { handleErrors, handleSuccess } from "../utils/codes.utils";
+import { registerUser, getUserByEmail, editUser, deleteUser, getAllUsers } from "../models/user.model.js";
+import { handleErrors, handleSuccess } from "../utils/codes.utils.js";
 
 interface UserRequest extends Request {
   user?: {

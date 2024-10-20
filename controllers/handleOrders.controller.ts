@@ -5,8 +5,8 @@ import {
   getOrdersByUserId,
   updateOrderStatus,
   deleteOrder,
-} from "../models/orders.model";
-import { handleErrors } from "../utils/codes.utils";
+} from "../models/orders.model.js";
+import { handleErrors } from "../utils/codes.utils.js";
 
 interface CustomError extends Error {
   code?: number;

@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import { handleErrors } from "../utils/codes.utils";
+import { handleErrors } from "../utils/codes.utils.js";
 import {
   handleGetPostsByUserId,
   handlePostUser,
   handleEditPostUser,
   handleDeletePostUser,
   handleGetAllPosts,
-} from "../controllers/handlePosts.controller";
-import { validateCredentialsAtSubmit } from "../middlewares/validate.middleware";
+} from "../controllers/handlePosts.controller.js";
+import { validateCredentialsAtSubmit } from "../middlewares/validate.middleware.js";
 
 const router = Router();
 

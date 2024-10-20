@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import { handleErrors } from "../utils/codes.utils";
+import { handleErrors } from "../utils/codes.utils.js";
 import {
   handleRegisterUser,
   handleGetUser,
   handleEditUser,
   handleDeleteUser,
   handleGetAllUsers,
-} from "../controllers/handleUser.controller";
-import { validateCredentialsAtRegister } from "../middlewares/validate.middleware";
+} from "../controllers/handleUser.controller.js";
+import { validateCredentialsAtRegister } from "../middlewares/validate.middleware.js";
 
 const router = Router();
 

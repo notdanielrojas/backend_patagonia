@@ -4,9 +4,9 @@ import {
   HandleGetOrdersByUserId,
   HandleUpdateOrderStatus,
   HandleDeleteOrder,
-} from "../controllers/handleOrders.controller";
-import { addOrderDetails } from "../models/orders.model";
-import { handleErrors } from "../utils/codes.utils";
+} from "../controllers/handleOrders.controller.js";
+import { addOrderDetails } from "../models/orders.model.js";
+import { handleErrors } from "../utils/codes.utils.js";
 
 const router = Router();
 

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
-import { verifyCredentials } from "../models/login.model";
-import { handleErrors, handleSuccess } from "../utils/codes.utils";
+import { verifyCredentials } from "../models/login.model.js";
+import { handleErrors, handleSuccess } from "../utils/codes.utils.js";
 
 const handleCredentialsAtLogin = async (req: Request, res: Response): Promise<void> => {
   try {
