@@ -34,18 +34,20 @@ const getAllPosts = async (): Promise<UserPost[]> => {
   return result.rows as UserPost[];
 };
 
-const editPostUser = async (user: UserPost, id: number): Promise<void> => {
-  const { image_url, title, description } = user;
+const editPostUser = async (
+  id: number,
+  postData: { image_url: string; title: string; description: string }
+): Promise<void> => {
+  const { image_url, title, description } = postData;
+  const query = `
+    UPDATE posts 
+    SET image_url = $1, title = $2, description = $3 
+    WHERE id = $4
+  `;
   const values = [image_url, title, description, id];
-  const query = "UPDATE posts SET image_url = $1, title = $2, description = $3 WHERE id = $4";
-
-  try {
-    await pool.query(query, values);
-  } catch (error) {
-    console.error("Error updating user post:", error);
-    throw new Error("Failed to update post in database");
-  }
+  await pool.query(query, values);
 };
+
 
 const deletePostUser = async (id: number): Promise<void> => {
   const query = "DELETE FROM posts WHERE id = $1";

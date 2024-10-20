@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { verifyDecodeToken } from "../utils/token.utils";
 
 interface CustomRequest extends Request {
-  user?: { email: string };
+  user?: { id: number; email: string };
 }
 
 interface CustomError extends Error {
@@ -17,8 +17,9 @@ const authMiddleware = (req: CustomRequest, res: Response, next: NextFunction): 
   }
 
   try {
-    const email = verifyDecodeToken(authorizationHeader);
-    req.user = { email };
+   
+    const { id, email } = verifyDecodeToken(authorizationHeader);
+    req.user = { id, email };
     next();
   } catch (error) {
     const customError = error as CustomError;

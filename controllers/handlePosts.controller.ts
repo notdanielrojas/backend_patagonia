@@ -17,7 +17,6 @@ interface UserPost {
 
 const handlePostUser = async (req: UserRequest, res: Response): Promise<void> => {
   const { image_url, title, description, user } = req.body;
-
   console.log("Request Body:", req.body);
   console.log("User ID:", user?.id);
   if (!image_url || !title || !description || !user?.id) {
@@ -78,30 +77,14 @@ const handleGetAllPosts = async (req: Request, res: Response): Promise<void> => 
 const handleEditPostUser = async (req: UserRequest, res: Response): Promise<void> => {
   const { id } = req.params;
   const { image_url, title, description } = req.body;
-  const userId = req.user?.id;
 
-  console.log("Post ID:", id);
-  console.log("User ID:", userId);
-  console.log("Request body:", { image_url, title, description });
-
-  if (!image_url || !title || !description || !userId) {
-    console.log("Missing fields:", { image_url, title, description, userId });
+  if (!image_url || !title || !description) {
     res.status(400).json({ message: "Missing required fields" });
     return;
   }
 
   try {
-      const post = await getPostById(Number(id));
-    if (!post) {
-      res.status(404).json({ message: "Post not found" });
-      return 
-    }
-
-    if (post.user_id !== Number(userId)) {
-      res.status(403).json({ message: "You are not authorized to edit this post" });
-      return 
-    }
-    await editPostUser({ image_url, title, description, user_id: Number(userId) }, Number(id));
+    await editPostUser(Number(id), { image_url, title, description });
     const successResponse = handleSuccess(200);
     res.status(successResponse.status).json(successResponse.message);
   } catch (error) {
