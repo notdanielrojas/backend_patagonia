@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import path from "path";
 
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+
 const logFilePath = path.join(__dirname, "../logs/access.log");
 
 const logger = (req: Request, res: Response, next: NextFunction): void => {

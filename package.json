@@ -2,15 +2,14 @@
   "type": "module",
   "name": "server",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "dist/src/index.js",
   "directories": {
     "lib": "lib",
     "test": "tests"
   },
   "scripts": {
-    "dev": "nodemon index.ts",
-    "start": "node index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc && node dist/src/index.js",
+    "start": "node dist/src/index.js",
     "build": "tsc"
   },
   "keywords": [],
