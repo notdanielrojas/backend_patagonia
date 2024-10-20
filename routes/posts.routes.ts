@@ -7,7 +7,7 @@ import {
   handleDeletePostUser,
   handleGetAllPosts,
 } from "../controllers/handlePosts.controller.js";
-import { validateCredentialsAtSubmit } from "../middlewares/validate.middleware.js";
+import { validateCredentialsAtEdit, validateCredentialsAtSubmit } from "../middlewares/validate.middleware.js";
 
 const router = Router();
 
@@ -38,7 +38,7 @@ router.post("/", validateCredentialsAtSubmit, async (req: Request, res: Response
   }
 });
 
-router.put("/:id", validateCredentialsAtSubmit, async (req: Request, res: Response): Promise<void> => {
+router.put("/:id", validateCredentialsAtEdit, async (req: Request, res: Response): Promise<void> => {
   try {
     await handleEditPostUser(req, res);
   } catch (error: any) {
